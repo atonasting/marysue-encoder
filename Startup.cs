@@ -41,6 +41,7 @@ namespace MareSueEncoder
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
         }
     }

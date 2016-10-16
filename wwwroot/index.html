@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>玛丽苏文本加密器 Mary Sue Text Encoder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/semantic.min.js"></script>
+    <script type="text/javascript">
+        var answers;
+
+        $(function () {
+            $("#btnEncode").click(function () {
+                var source = $.trim($("#txtSource").val());
+                if (source) {
+                    showloading();
+                    var param = { source: source };
+                    $.ajax({
+                        url: 'api/encode',
+                        type: 'POST',
+                        data: JSON.stringify(param),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            if (data && data.code) {
+                                $("#txtCode").val(data.code);
+                                $("#txtCode").select();
+                            }
+                            else
+                                $("#txtCode").val("哼，不告诉你");
+                            hideloading();
+                        },
+                        error: function (err) {
+                            $("#txtCode").val("哼，不告诉你");
+                            hideloading();
+                        }
+                    });
+                }
+            });
+            $("#btnDecode").click(function () {
+                var code = $.trim($("#txtCode").val());
+                if (code) {
+                    showloading();
+                    var param = { code: code };
+                    $.ajax({
+                        url: 'api/decode',
+                        type: 'POST',
+                        data: JSON.stringify(param),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            if (data && data.source) {
+                                $("#txtSource").val(data.source);
+                                $("#txtSource").select();
+                            }
+                            else
+                                $("#txtSource").val("我的家族里没有这么一位！");
+                            hideloading();
+                        },
+                        error: function (err) {
+                            $("#txtSource").val("你也配姓璃莹殇？");
+                            hideloading();
+                        }
+                    });
+                }
+            });
+
+            $("textarea").focus(function() {
+                var $this = $(this);
+                $this.select();
+
+                //fix bug in chrome
+                $this.mouseup(function() {
+                    $this.unbind("mouseup");
+                    return false;
+                });
+            });
+        });
+
+        function showloading() {
+            $("#loading").removeClass("disabled");
+            $("#loading").addClass("active");
+        }
+
+        function hideloading() {
+            $("#loading").removeClass("active");
+            $("#loading").addClass("disabled");
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <style type="text/css">
+        body {
+            margin: 1rem 0rem;
+        }
+
+        textarea#txtCode::selection {
+            background: #CC88CC;
+        }
+
+        textarea#txtCode::-moz-selection {
+            background: #CC88CC;
+        }
+
+        textarea#txtCode::-webkit-selection {
+            background: #CC88CC;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui container">
+        <div id="loading" class="ui disabled inverted dimmer">
+            <div class="ui text loader">王氏集团破产中...</div>
+        </div>
+        <div class="ui form">
+            <div class="field">
+                <label>原文：</label>
+                <textarea id="txtSource"></textarea>
+            </div>
+            <button id="btnEncode" class="ui floated labeled icon button">
+                <i class="arrow down icon"></i>
+                成为天使
+            </button>
+            <button id="btnDecode" class="ui right floated right labeled icon button">
+                <i class="arrow up icon"></i>
+                降临凡间
+            </button>
+            <p></p>
+            <div class="field">
+                <label>本小姐的名字：</label>
+                <textarea id="txtCode"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

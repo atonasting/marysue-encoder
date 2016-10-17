@@ -25,7 +25,7 @@
                         success: function (data) {
                             if (data && data.code) {
                                 $("#txtCode").val(data.code);
-                                $("#txtCode").select();
+                                if (!isMobile()) $("#txtCode").select();
                             }
                             else
                                 $("#txtCode").val("哼，不告诉你");
@@ -53,7 +53,7 @@
                         success: function (data) {
                             if (data && data.source) {
                                 $("#txtSource").val(data.source);
-                                $("#txtSource").select();
+                                if (!isMobile()) $("#txtSource").select();
                             }
                             else
                                 $("#txtSource").val("我的家族里没有这么一位！");
@@ -67,7 +67,7 @@
                 }
             });
 
-            $("textarea").focus(function() {
+            $("textarea").focus(function () {
                 var $this = $(this);
                 $this.select();
 
@@ -88,23 +88,27 @@
             $("#loading").removeClass("active");
             $("#loading").addClass("disabled");
         }
+
+        function isMobile() {
+            return $(window).width() < 768;
+        }
     </script>
     <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
     <style type="text/css">
         body {
-            margin: 1rem 0rem;
+            margin: 1rem 2rem;
         }
 
         textarea#txtCode::selection {
-            background: #CC88CC;
+            background: #D6A0D6;
         }
 
         textarea#txtCode::-moz-selection {
-            background: #CC88CC;
+            background: #D6A0D6;
         }
 
         textarea#txtCode::-webkit-selection {
-            background: #CC88CC;
+            background: #D6A0D6;
         }
     </style>
 </head>

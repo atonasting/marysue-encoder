@@ -14,6 +14,7 @@ namespace MareSueEncoder.Controllers
     public class DecodeController : Controller
     {
         private ILogger _logger;
+        private const int _decodeMaxLength = 100000;
 
         public DecodeController(ILogger<DecodeController> logger)
         {
@@ -30,6 +31,12 @@ namespace MareSueEncoder.Controllers
             }
 
             var code = param.Code.Trim();
+            if (code.Length > _decodeMaxLength)
+            {
+                _logger.LogError("Decoding param too long: {0}", code.Length);
+                return BadRequest("param too long");
+            }
+
             try
             {
                 var sourceAes = EncodeTool.StringToByteArray(code);

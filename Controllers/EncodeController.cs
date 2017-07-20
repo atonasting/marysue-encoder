@@ -14,6 +14,7 @@ namespace MareSueEncoder.Controllers
     public class EncodeController : Controller
     {
         private ILogger _logger;
+        private const int _encodeMaxLength = 20000;
 
         public EncodeController(ILogger<EncodeController> logger)
         {
@@ -31,6 +32,12 @@ namespace MareSueEncoder.Controllers
             }
 
             var source = param.Source.Trim();
+            if (source.Length> _encodeMaxLength)
+            {
+                _logger.LogError("Encoding param too long: {0}", source.Length);
+                return BadRequest("param too long");
+            }
+
             try
             {
                 var sourceAes = AESTool.Encrypt(Encoding.UTF8.GetBytes(source));

@@ -18,7 +18,7 @@
 
 ## Demo
 
-http://marysue.funnyjs.com
+https://sulian.me/marysue/
 
 ## Run
 

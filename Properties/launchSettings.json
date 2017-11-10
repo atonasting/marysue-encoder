@@ -11,7 +11,7 @@
     "MareSueEncoder": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5001/",
+      "launchUrl": "http://localhost:5001/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

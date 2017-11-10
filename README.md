@@ -18,7 +18,7 @@
 
 ## Demo
 
-http://marysue.funnyjs.com
+https://funnyjs.com/marysue/
 
 ## Run
 

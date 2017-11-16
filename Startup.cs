@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MareSueEncoder.Models;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace marysue_encoder
 {
@@ -27,6 +28,7 @@ namespace marysue_encoder
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Replace(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(TimedLogger<>)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -34,34 +34,35 @@ namespace MareSueEncoder.Controllers
             var source = param.Source.Trim();
             if (source.Length> _encodeMaxLength)
             {
-                _logger.LogError("Encoding param too long: {0}", source.Length);
+                _logger.LogError($"Encoding param too long: {source.Length}");
                 return BadRequest("param too long");
             }
 
+            var remoteIP = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             try
             {
                 var sourceAes = AESTool.Encrypt(Encoding.UTF8.GetBytes(source));
                 var code = EncodeTool.ByteArrayToString(sourceAes);
 
-                var testaes = EncodeTool.StringToByteArray(code);
-                if (testaes.Length != sourceAes.Length)
-                {
-                    for (var i = 0; i < testaes.Length; i++)
-                    {
-                        if (testaes[i] != sourceAes[i])
-                        {
-                            _logger.LogError("Encoding error in {0} of {1}", i, sourceAes.Length);
-                            break;
-                        }
-                    }
-                }
+                //var testaes = EncodeTool.StringToByteArray(code);
+                //if (testaes.Length != sourceAes.Length)
+                //{
+                //    for (var i = 0; i < testaes.Length; i++)
+                //    {
+                //        if (testaes[i] != sourceAes[i])
+                //        {
+                //            _logger.LogError($"Encoding error in {i} of {sourceAes.Length}");
+                //            break;
+                //        }
+                //    }
+                //}
 
-                _logger.LogInformation("Encoding successfully.\nSource:  {0} \nCode: {1}", source, code);
+                _logger.LogInformation($"(IP:{remoteIP})Encoding successfully.\nSource:  {source} \nCode: {code}");
                 return new JsonResult(new EncodeResult() { Code = code });
             }
             catch( Exception ex)
             {
-                _logger.LogError("Encoding error for string: \n{0} \nError:{1}", source, ex.Message);
+                _logger.LogError($"(IP:{remoteIP})Encoding error for string: \n{source} \nError:{ex.Message}");
                 return BadRequest("encode error");
             }
         }

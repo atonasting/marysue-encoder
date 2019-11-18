@@ -13,6 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:5001/index.html",
       "environmentVariables": {
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5001/"

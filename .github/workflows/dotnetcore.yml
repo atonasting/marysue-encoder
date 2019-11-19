@@ -1,4 +1,4 @@
-name: Build .NET Core Application
+name: Build
 
 on: [push]
 

@@ -1,6 +1,7 @@
 # MarySue Encoder
 
 [![Build Status](https://travis-ci.org/atonasting/marysue-encoder.svg?branch=master)](https://travis-ci.org/atonasting/marysue-encoder)
+![](https://github.com/atonasting/marysue-encoder/workflows/dotnetcore/badge.svg)
 
 把任意文字和玛丽苏体的姓名进行加密转换。
 

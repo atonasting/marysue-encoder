@@ -30,6 +30,18 @@ namespace marysue_encoder
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+            services.AddLogging(options =>
+            {
+                // Provided by Microsoft.Extensions.Logging.Console
+                options.AddSimpleConsole(options =>
+                    options.TimestampFormat = "[yyyy-MM-dd HH:mm:ss]"
+                );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +51,13 @@ namespace marysue_encoder
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseForwardedHeaders();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
             });
         }
     }
 }
- 

@@ -11,12 +11,12 @@
     "MareSueEncoder": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5001/index.html",
+      "launchUrl": "http://localhost:5081/index.html",
       "environmentVariables": {
-        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
       },
-      "applicationUrl": "http://localhost:5001/"
+      "applicationUrl": "http://localhost:5081/"
     },
     "Docker": {
       "commandName": "Docker",

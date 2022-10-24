@@ -18,13 +18,13 @@
 
 ## Demo
 
-https://funnyjs.com/marysue/
+https://sulian-blog.com/marysue/
 
 ## Run
 
-Written in C#, running on dotnet core platform.
+Written in C#, running on dotnet 6 platform.
 
-1. Visit https://www.microsoft.com/net/core to install .net core runtime
+1. Visit https://dotnet.microsoft.com/en-us/download to install .net runtime
 1. git clone code
 1. cd marysue-encoder
 1. dotnet restore
